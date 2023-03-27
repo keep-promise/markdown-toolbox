@@ -49,6 +49,14 @@
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
+.form-control:hover {
+  border-color: #7832e2;
+}
+
+.form-control:focus {
+  border-color: #7832e2;
+}
+
 .btn-secondary {
   font-size: 16px;
   color: #fff;
