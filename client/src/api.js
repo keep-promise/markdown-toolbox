@@ -4,7 +4,7 @@
  import axios from "axios";
 
  axios.defaults.timeout = 5000;
- axios.defaults.baseURL = window.location.origin;
+ axios.defaults.baseURL = 'http://localhost:8000';
  
  /**
   * http request 拦截器
@@ -120,8 +120,7 @@
  }
  
  //统一接口处理，返回数据
- export default function (fecth, url, param) {
-   let _data = "";
+ export function handle(fecth, url, param) {
    return new Promise((resolve, reject) => {
      switch (fecth) {
        case "get":

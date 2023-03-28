@@ -1,0 +1,10 @@
+{
+  "name": "markdown-toolbox",
+  "version": "1.0.0",
+  "description": "markdown-web工具箱",
+  "scripts": {
+    "server": "node ./server/app.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
