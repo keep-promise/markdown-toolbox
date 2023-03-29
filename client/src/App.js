@@ -1,38 +1,36 @@
 import React, { useState } from 'react';
-import './App.css';
 import { get } from './api';
 import TurndownService from 'turndown'
-import { gfm, tables, strikethrough } from 'turndown-plugin-gfm'
-// import MarkdownEdit from 'markdown-editor-reactjs'
-import Editor from 'wrap-md-editor';
+import { gfm, tables, strikethrough } from 'turndown-plugin-gfm';
+import MarkdownIt from 'markdown-it';
+import MdEditor from 'react-markdown-editor-lite';
+import 'react-markdown-editor-lite/lib/index.css';
+import './App.css';
 
+// Register plugins if required
+// MdEditor.use(YOUR_PLUGINS_HERE);
 
+// Initialize a markdown parser
+const mdParser = new MarkdownIt();
 
-function MdEditor(props) {
-    const { content } = props;
-    // const config = {
-    //   markdown: content,
-    //   onload: (editor, func) => {
-    //     let md = editor.getMarkdown();
-    //     let html = editor.getHTML();
-    //   }
-    // }
-    console.log('mardown', content)
-    return (
-      <Editor
-        config={{
-          markdown: content,
-          onload: (editor, func) => {
-            // let md = editor.getMarkdown();
-            // let html = editor.getHTML();
-          }
-        }}
-      />
-    )
+function handleEditorChange({ html, text }) {
+  // console.log('handleEditorChange', html, text);
 }
 
+const MarkdownEditor = (props) => {
+  const { content } = props;
+  return (
+    <MdEditor
+      value={content}
+      style={{ height: '500px' }}
+      renderHTML={text => mdParser.render(text)} 
+      onChange={handleEditorChange} 
+    />
+  );
+};
+
 function App() {
-  
+  const [url, setUrl] = useState('');
   const [content, setContent] = useState('hello markdown');
 
   const html2md = (str) => {
@@ -50,7 +48,7 @@ function App() {
         // 除了pre标签，里面是否还有code标签包裹，有的话去掉首尾的`（针对微信文章）
         const isCode = content[0] === '`' && content[len - 1] === '`'
         const result = isCode ? content.substr(1, len - 2) : content
-        return '```\n' + result + '\n```\n'
+        return '```\n' + result + '\n```\n';
       }
     })
     const markdown = turndownService.turndown(str)
@@ -58,14 +56,21 @@ function App() {
   };
 
   const gethtml = () => {
-    get('/gethtml/byurl').then(res => {
+    get('/gethtml/byurl', { url: url }).then(res => {
       if (res.code === 1) {
         setContent(html2md(res.html));
+      } else {
+        throw { message: '获取失败' }
       }
     }).catch((err) => {
 
     });
   }
+
+  const handleChange = (event) => {
+    setUrl(event.target.value);
+  }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -75,20 +80,22 @@ function App() {
         <div className="veditor-container">
           <div className="url-submit">
             <input 
-              type="text" 
+              type="text"
+              value={url}
               className="form-control" 
               placeholder="请输入url"
+              onChange={handleChange}
             >
             </input>
             <button 
-              type="button" 
+              type="button"
               className="btn-secondary"
               onClick={gethtml}
             >
               一键转换
             </button>
           </div>
-          <MdEditor content={content} />
+          <MarkdownEditor content={content} />
         </div>
       </div>
     </div>

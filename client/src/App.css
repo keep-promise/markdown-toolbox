@@ -17,7 +17,9 @@
 
 .App-header {
   height: 260px;
-  background-color: #7832e2;
+  background-color: #c26fdb;
+  background-image: linear-gradient(
+    120deg,#7832e2,#c26fdb);
   display: flex;
   flex-direction: row;
 }
@@ -101,4 +103,12 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.rc-md-navigation {
+  background-color: #7832e2 !important;
+}
+
+.button {
+  color: #fff !important;
 }
