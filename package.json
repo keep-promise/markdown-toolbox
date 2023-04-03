@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "markdown-web工具箱",
   "scripts": {
+    "client": "cd client && npm run start",
     "server": "node ./server/app.js"
   },
   "author": "",

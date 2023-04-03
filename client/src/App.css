@@ -15,19 +15,82 @@
   }
 }
 
-.App-header {
+.App-banner {
   height: 260px;
   background-image: linear-gradient(
     120deg, var(--color1), var(--color2));
+}
+
+.header {
   display: flex;
   flex-direction: row;
 }
 
 .text-int {
   color: #fff;
-  line-height: 160px;
+  /* line-height: 160px; */
   font-size: 32px;
   padding-left: 40px;
+  padding: 12px 24px;
+}
+
+.icon-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+.icon-item {
+  height: 24px;
+  line-height: 24px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-right: 24px;
+}
+
+.icon-link {
+  height: 24px;
+  line-height: 24px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-decoration: none;
+}
+
+.icon-text {
+  margin-left: 4px;
+  color: #fff;
+}
+
+.theme-control {
+  height: 36px;
+  line-height: 36px;
+  flex-grow: 1;
+  display: flex;
+  color: #fff;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 12px 24px;
+  font-weight: 500;
+}
+
+.default-color {
+  padding: 0px 16px;
+  border: 1px solid #fff;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 6px;
+}
+
+.green-color {
+  padding: 0px 16px;
+  border: 1px solid #fff;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 6px;
 }
 
 .url-submit {
@@ -110,4 +173,5 @@
 
 .button {
   color: #fff !important;
+  /* color: rgb(20, 31, 49); */
 }
