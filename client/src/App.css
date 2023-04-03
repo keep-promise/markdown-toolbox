@@ -17,9 +17,8 @@
 
 .App-header {
   height: 260px;
-  background-color: #c26fdb;
   background-image: linear-gradient(
-    120deg,#7832e2,#c26fdb);
+    120deg, var(--color1), var(--color2));
   display: flex;
   flex-direction: row;
 }
@@ -52,19 +51,19 @@
 }
 
 .form-control:hover {
-  border-color: #7832e2;
+  border-color: var(--color1);
 }
 
 .form-control:focus {
-  border-color: #7832e2;
+  border-color: var(--color1);
 }
 
 .btn-secondary {
   font-size: 16px;
   color: #fff;
   border-radius: 4px;
-  background-color: #7832e2;
-  border-color: #7832e2;
+  background-color: var(--color1);
+  border-color: var(--color1);
   border: none;
 }
 
@@ -106,7 +105,7 @@
 }
 
 .rc-md-navigation {
-  background-color: #7832e2 !important;
+  background-color: var(--color1) !important;
 }
 
 .button {
