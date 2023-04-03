@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 import { get } from './api';
 import TurndownService from 'turndown'
 import { gfm, tables, strikethrough } from 'turndown-plugin-gfm';
@@ -13,21 +13,29 @@ import './App.css';
 // Initialize a markdown parser
 const mdParser = new MarkdownIt();
 
-function handleEditorChange({ html, text }) {
-  // console.log('handleEditorChange', html, text);
-}
-
-const MarkdownEditor = (props) => {
+const MarkdownEditor = memo((props) => {
   const { content } = props;
+
+  function handleEditorChange({ html, text }) {
+    const { onChange } = props;
+    console.log('handleEditorChange', html, text);
+    onChange && onChange(text);
+  }
+
   return (
     <MdEditor
       value={content}
-      style={{ height: '500px' }}
+      style={{ height: '440px' }}
       renderHTML={text => mdParser.render(text)} 
-      onChange={handleEditorChange} 
+      onChange={handleEditorChange}
     />
   );
-};
+}, (props, nextProps) =>{
+  console.log(props, nextProps)
+  return props.content === nextProps.content;
+});
+
+
 
 function App() {
   const [url, setUrl] = useState('');
@@ -56,6 +64,7 @@ function App() {
   };
 
   const gethtml = () => {
+    if (!url) return;
     get('/gethtml/byurl', { url: url }).then(res => {
       if (res.code === 1) {
         setContent(html2md(res.html));
@@ -95,7 +104,10 @@ function App() {
               一键转换
             </button>
           </div>
-          <MarkdownEditor content={content} />
+          <MarkdownEditor 
+            content={content}
+            onChange={(value) => setContent(value)}
+          />
         </div>
       </div>
     </div>
