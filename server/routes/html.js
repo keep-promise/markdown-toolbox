@@ -1,7 +1,6 @@
 const express = require('express');
 const request = require('request');
 const jsdom = require('jsdom');
-const bodyParser = require('body-parser')
 const router = express.Router();
 
 const { JSDOM } = jsdom;
