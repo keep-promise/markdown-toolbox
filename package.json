@@ -6,6 +6,6 @@
     "client": "cd client && npm run start",
     "server": "node ./server/app.js"
   },
-  "author": "",
+  "author": "keep-promise",
   "license": "ISC"
 }
