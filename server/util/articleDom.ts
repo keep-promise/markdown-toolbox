@@ -171,7 +171,6 @@ export class ArticleDom {
   getArticleHtml (html) {
     const dom = new JSDOM(html);
     const RuleFn = RuleFnMap.find((RuleFn) => RuleFn.rule(this.url));
-    console.log('111')
     return RuleFn.exec(dom);
   }
 
